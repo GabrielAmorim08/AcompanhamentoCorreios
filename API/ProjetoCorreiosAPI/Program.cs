@@ -1,4 +1,6 @@
 using Microsoft.EntityFrameworkCore;
+using ProjetoCorreiosAPI.Bussines;
+using ProjetoCorreiosAPI.Interface;
 using ProjetoCorreiosAPI.Model;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -10,9 +12,17 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-string connectionString = string.Empty;
+#region CONFIGURAÇÃO DO BANCO
 
+string connectionString = builder.Configuration.GetConnectionString("String");
 builder.Services.AddDbContext<DbCorreiosContext>(op => op.UseSqlServer(connectionString));
+#endregion
+
+#region INJEÇÃO DE DEPENDENCIA
+builder.Services.AddScoped<ICorreio, CorreioBO>();
+#endregion
+
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
