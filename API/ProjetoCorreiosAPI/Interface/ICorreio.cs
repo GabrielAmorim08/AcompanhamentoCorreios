@@ -1,7 +1,10 @@
-﻿namespace ProjetoCorreiosAPI.Interface
+﻿using System.Threading.Tasks;
+using ProjetoCorreiosAPI.VO;
+
+namespace ProjetoCorreiosAPI.Interface
 {
     public interface ICorreio
     {
-        public string GetToken();
+        public Task<ReturnVO<AuthVO>> GetToken();
     }
 }

@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using ProjetoCorreiosAPI.Interface;
+using ProjetoCorreiosAPI.VO;
 
 namespace ProjetoCorreiosAPI.Controllers
 {
@@ -10,6 +11,6 @@ namespace ProjetoCorreiosAPI.Controllers
         protected readonly ICorreio _bussines;
         public CorreioController(ICorreio business) { _bussines = business; }
         [HttpGet(Name ="GetToken")]
-        public string GetToken() => _bussines.GetToken();
+        public Task<ReturnVO<AuthVO>> GetToken() => _bussines.GetToken();
     }
 }
